@@ -3,15 +3,22 @@ package com.example.kyohoe.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import com.example.kyohoe.SearchListResponse
 import com.google.accompanist.web.WebView
 import com.google.accompanist.web.rememberWebViewStateWithHTMLData
@@ -61,24 +68,39 @@ fun ShowSomething() {
             response = null
         }
     }
-
-    Column {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+    ) {
         response?.items?.firstOrNull()?.let { item ->
-            ExampleYouTube(video = item.id.videoId)
+            val thumbHeight = item.snippet.thumbnails.high.height
+            val thumbWidth = item.snippet.thumbnails.high.width
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxSize(),
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(thumbWidth.toFloat() / thumbHeight.toFloat())
+                ) {
+                    ExampleYouTube(
+                        video = item.id.videoId
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
 fun ExampleYouTube(video: String) {
-//    val webViewState = rememberWebViewState(url = "https://www.kangkyu.com")
     val webViewState = rememberWebViewStateWithHTMLData(data = getHTML(video))
     WebView(
         state = webViewState,
         modifier = Modifier.fillMaxSize(),
-        onCreated = { webView ->
-            webView.settings.javaScriptEnabled = true
-        }
+        onCreated = { it.settings.javaScriptEnabled = true },
+        onDispose = { it.settings.javaScriptEnabled = false },
     )
 }
 
