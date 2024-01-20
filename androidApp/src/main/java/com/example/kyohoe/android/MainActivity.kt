@@ -25,6 +25,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -101,6 +104,11 @@ fun List<SearchResult>.toVideos(): List<YouTubeVideo> {
     return this.map { YouTubeVideo(it.id.videoId, it.snippet.title, it.snippet.thumbnails.high.url) }
 }
 
+val notoSerifFamily = FontFamily(
+    Font(R.font.noto_serif, FontWeight.Normal),
+    Font(R.font.noto_serif_bold, FontWeight.Bold)
+)
+
 @Composable
 fun VideosGrid(videos: List<YouTubeVideo>, clickFunc: (YouTubeVideo) -> Unit) {
 
@@ -127,7 +135,8 @@ fun VideosGrid(videos: List<YouTubeVideo>, clickFunc: (YouTubeVideo) -> Unit) {
                         )
                         Text(
                             text = video.title,
-                            modifier = Modifier.padding(16.dp)
+                            modifier = Modifier.padding(16.dp),
+                            fontFamily = notoSerifFamily, fontWeight = FontWeight.Bold
                         )
                     }
                 }
