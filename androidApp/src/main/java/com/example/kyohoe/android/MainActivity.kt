@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
 // val anconnuri = "https://www.youtube.com/channel/UCIsWNZwrpO_CnlaXO5Oc6bQ"
 // val passionworship = "https://www.youtube.com/channel/UCBTZoebaG4rvChzKQ2D80-w"
 const val channelId = "UCIsWNZwrpO_CnlaXO5Oc6bQ"
-const val myApiKey = "YOUR_API_KEY"
+const val myApiKey: String = System.getenv("YOUTUBE_API_KEY") ?: "YOUR_API_KEY"
 
 @Composable
 fun ShowSomething(ctext: MainActivity) {
