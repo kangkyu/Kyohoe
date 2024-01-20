@@ -59,15 +59,16 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// val anconnuri = "https://www.youtube.com/channel/UCIsWNZwrpO_CnlaXO5Oc6bQ"
-// val passionworship = "https://www.youtube.com/channel/UCBTZoebaG4rvChzKQ2D80-w"
-const val channelId = "UCIsWNZwrpO_CnlaXO5Oc6bQ"
-const val myApiKey: String = System.getenv("YOUTUBE_API_KEY") ?: "YOUR_API_KEY"
+const val envVariableName = "YOUTUBE_API_KEY"
 
 @Composable
 fun ShowSomething(ctext: MainActivity) {
     var outcome: String? by remember { mutableStateOf(null) }
     var response: SearchListResponse? by remember { mutableStateOf(null) }
+    val myApiKey: String = System.getenv(envVariableName) ?: "YOUR_API_KEY"
+    val channelId = "UCIsWNZwrpO_CnlaXO5Oc6bQ"
+    // val anconnuri = "https://www.youtube.com/channel/UCIsWNZwrpO_CnlaXO5Oc6bQ"
+    // val passionworship = "https://www.youtube.com/channel/UCBTZoebaG4rvChzKQ2D80-w"
 
     LaunchedEffect(Unit) {
         withContext(Dispatchers.IO) {
