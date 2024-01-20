@@ -8,10 +8,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data
-            android:name="com.google.android.youtube.v3.API_KEY"
-            android:value="YOUR_API_KEY" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -20,5 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".VideoActivity"
+            android:exported="true" />
     </application>
 </manifest> 

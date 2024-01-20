@@ -47,6 +47,7 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.4.3")
     implementation("androidx.compose.material:material:1.4.3")
     implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("com.google.accompanist:accompanist-webview:0.30.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 }
