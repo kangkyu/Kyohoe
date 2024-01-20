@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Surface
@@ -24,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.kyohoe.SearchListResponse
@@ -112,17 +114,21 @@ fun VideosGrid(videos: List<YouTubeVideo>, clickFunc: (YouTubeVideo) -> Unit) {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Row {
+                    Row(
+                        modifier = Modifier.clickable {
+                            // start VideoActivity and pass the video details
+                            clickFunc(video)
+                        }
+                    ) {
                         AsyncImage(
                             model = video.thumbnailUrl.imageModel(LocalContext.current),
                             contentDescription = video.title,
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.clickable {
-                                // start ProductActivity and pass the productItem details
-                                clickFunc(video)
-                            }
                         )
-                        Text(text = video.title)
+                        Text(
+                            text = video.title,
+                            modifier = Modifier.padding(16.dp)
+                        )
                     }
                 }
             }
